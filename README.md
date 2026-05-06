@@ -1,11 +1,26 @@
 # Financial Transaction Anomaly Detection
 
-This project provides an end-to-end anomaly detection workflow for financial transactions. It supports two pipelines:
+This project focuses on detecting suspicious financial transactions 
+in a real-world banking scenario, similar to anti-money laundering (AML) systems.
+
+The system was developed using real banking data from a data competition, 
+simulating a production-like fraud detection workflow.
+
+It provides an end-to-end machine learning pipeline that transforms raw 
+customer, account, and transaction data into actionable risk signals.
+
+## Key Highlights
+
+- End-to-end ML pipeline for financial anomaly detection
+- Supports both domestic (NTD) and foreign currency transaction flows
+- Modular pipeline design with reusable feature engineering components
+- Strong recall performance on highly imbalanced fraud dataset
+- Reproducible artifacts for analysis and deployment
+
+It supports two pipelines:
 
 - `nt`: Taiwan-dollar transaction pipeline
 - `foreign`: Foreign-currency transaction pipeline
-
-The project was built on real-world banking data from a data competition. It involved developing a full machine learning workflow and presenting both the conceptual design and implementation outcomes to the bank and the competition organizers.
 
 Each pipeline follows the same high-level flow:
 
@@ -18,9 +33,17 @@ Each pipeline follows the same high-level flow:
 
 ## Feature Engineering Overview
 
-The project includes lightweight but practical feature engineering designed to capture account behavior, transaction intensity, balance-related patterns, and currency activity.
+The feature engineering in this project is designed to capture abnormal behavioral patterns in financial transactions, rather than relying on raw values alone.
 
-Examples of features used in the `nt` pipeline include:
+In particular, the features aim to identify:
+
+- unusually high transaction frequency
+- inconsistent debit/credit behavior
+- abnormal transaction-to-balance relationships
+- irregular timing patterns between transactions
+- unusual activity across multiple currencies
+
+Key feature groups in the `nt` pipeline include:
 
 - account status indicator features, such as whether certain warning or restriction flags were ever triggered
 - transaction count statistics per account, including daily mean, variance, and total transaction counts
@@ -30,7 +53,7 @@ Examples of features used in the `nt` pipeline include:
 - ratio features, such as transaction amount relative to account balance
 - transaction timing features, such as average and standard deviation of time gaps between transactions
 
-Examples of features used in the `foreign` pipeline include:
+Key feature groups in the `foreign` pipeline include:
 
 - foreign account profile features, such as account status flags, transaction counters, and account-level debit or credit totals
 - currency portfolio features, such as total foreign balance, maximum held balance, number of active currencies, and indicators for major currencies like USD, JPY, AUD, and CNY
